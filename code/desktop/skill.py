@@ -10,8 +10,8 @@ from typing import Any
 from schemas import AgentResult, NodeSpec
 from gateway import LLM
 
-# Find cua-driver in PATH, fallback to local path (Windows uses .exe automatically if in PATH)
-CUA = shutil.which("cua-driver") or str(Path.home() / ".local" / "bin" / "cua-driver")
+# Find cua-driver in PATH, fallback to native shell resolution
+CUA = shutil.which("cua-driver") or shutil.which("cua-driver.exe") or "cua-driver"
 
 class CuaError(RuntimeError):
     pass
@@ -56,13 +56,19 @@ class DesktopSkill:
                 return self._pack_error(f"failed to launch {app_name}", goal, time.time() - started)
 
             # Wait for app to be ready and get window_id
-            time.sleep(1.0)
-            windows_res = call_cua("list_windows", {})
-            windows = [w for w in windows_res.get("windows", []) if w.get("pid") == pid]
-            if not windows:
+            wid = None
+            for _ in range(5):
+                time.sleep(1.0)
+                windows_res = call_cua("list_windows", {})
+                windows = [w for w in windows_res.get("windows", []) 
+                           if w.get("pid") == pid or app_name.lower() in w.get("title", "").lower()]
+                if windows:
+                    wid = windows[0].get("window_id")
+                    pid = windows[0].get("pid")
+                    break
+
+            if not wid:
                 return self._pack_error(f"launched {app_name} but found no windows", goal, time.time() - started)
-            
-            wid = windows[0].get("window_id")
 
             # macOS Background Activation Trap:
             if sys.platform == "darwin":
@@ -85,6 +91,7 @@ class DesktopSkill:
                 prompt = f"""You are driving a desktop application.
 Goal: {goal}
 App: {app_name}
+
 
 Current accessibility tree:
 {state.get('tree_markdown', '')[:25000]}

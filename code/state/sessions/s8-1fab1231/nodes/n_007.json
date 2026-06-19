@@ -1,0 +1,27 @@
+{
+  "node_id": "n:7",
+  "skill": "formatter",
+  "status": "complete",
+  "inputs": [
+    "USER_QUERY",
+    "n:6"
+  ],
+  "result": {
+    "success": true,
+    "agent_name": "formatter",
+    "output": {
+      "final_answer": "15 percent of 850 is 127.5."
+    },
+    "artifacts": [],
+    "successors": [],
+    "cost": 0.0,
+    "elapsed_s": 2.983487367630005,
+    "provider": "gemini",
+    "error": null,
+    "error_code": null
+  },
+  "prompt_sent": "You are the Formatter skill. You are the conventional TERMINAL node of\nevery DAG. Your job is to produce the final user-facing answer from\nwhatever upstream nodes have provided.\n\nYou make no tool calls. The user's original query appears under\nUSER_QUERY. Upstream results appear under INPUTS.\n\nProcedure:\n  1. Read USER_QUERY.\n  2. Read INPUTS and decide which fields / findings answer the query.\n  3. Write the user-facing answer in plain English. Adapt the format\n     (numbered list, comparison table, one paragraph) to what the\n     question actually asked.\n\nOutput schema (JSON, no prose, no markdown fences):\n\n  {\n    \"final_answer\": \"<the answer the user sees>\"\n  }\n\nRules:\n  - This is the LAST node. Do not add successors.\n  - The answer must be answerable from INPUTS alone. If an upstream\n    node returned `(not found)` or marked itself failed, say so plainly\n    to the user rather than inventing.\n  - Cite sources only when an upstream node included them (Researcher\n    nodes do; Retriever nodes do). Do not invent URLs.\n\nUSER_QUERY: Open calculator and calculate 15 percent of 850\n\nINPUTS:\n[\n  {\n    \"id\": \"USER_QUERY\",\n    \"kind\": \"query\",\n    \"value\": \"Open calculator and calculate 15 percent of 850\"\n  },\n  {\n    \"id\": \"n:6\",\n    \"kind\": \"upstream\",\n    \"skill\": \"sandbox_executor\",\n    \"output\": {\n      \"exit_code\": 0,\n      \"stdout\": \"15 percent of 850 is 127.5\\r\\n\",\n      \"stdout_truncated\": false,\n      \"stderr\": \"\",\n      \"stderr_truncated\": false,\n      \"files_written\": [],\n      \"timed_out\": false,\n      \"cwd\": \"C:\\\\Users\\\\akshat.j\\\\AppData\\\\Local\\\\Temp\\\\s8sandbox-7mdvwbav\"\n    }\n  }\n]",
+  "started_at": 1781866746.0753639,
+  "completed_at": 1781866749.0588515,
+  "retries": 0
+}

@@ -1,0 +1,25 @@
+{
+  "node_id": "n:2",
+  "skill": "computer",
+  "status": "failed",
+  "inputs": [],
+  "result": {
+    "success": false,
+    "agent_name": "computer",
+    "output": {
+      "goal": "Calculate 15 percent of 850 (0.15 * 850) and read the result.",
+      "error": "action budget exceeded"
+    },
+    "artifacts": [],
+    "successors": [],
+    "cost": 0.0,
+    "elapsed_s": 52.07915544509888,
+    "provider": "",
+    "error": "action budget exceeded",
+    "error_code": null
+  },
+  "prompt_sent": "The Computer skill automates native desktop applications using the OS accessibility\ntree (macOS AX, Windows UIA, Linux AT-SPI). It walks a multi-layer cascade mirroring\nthe Browser skill: deterministic metadata extraction, accessibility tree traversal,\nand visual set-of-marks escalation.\n\nThe execution bypasses standard LLM tool dispatch. Instead, the `desktop/skill.py`\nwrapper autonomously drives a rigid Scan-Act-Verify loop:\n1. Scan: Capture the `get_window_state` tree.\n2. Act: Prompt Gemini 3.1 Flash-Lite to select the next `element_index` or action.\n3. Verify: Re-scan to ensure the application state has progressed.\n\nInputs: `metadata.app` (required, the exact name of the application to launch or\ntarget) and `metadata.goal` (required, free-text description of the task to\naccomplish).\nOutput: `AgentResult` populated with the sequence of actions taken or an error.\nUse when the user requests interactions with local applications, settings, or\ndesktop files that cannot be handled via standard terminal commands.\n\nINPUTS:\n[]",
+  "started_at": 1781866687.18745,
+  "completed_at": 1781866739.2666068,
+  "retries": 0
+}
