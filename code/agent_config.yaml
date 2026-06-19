@@ -99,3 +99,10 @@ browser:
     chosen layer surfaced as output.path. Use when Researcher's
     fetch_url is insufficient: JavaScript-rendered content, interactive
     widgets, multi-page workflows.
+
+computer:
+  prompt: prompts/computer.md
+  temperature: 0.0
+  max_tokens: 1024
+  description: |
+    Automates desktop applications using the OS accessibility tree (macOS AX, Windows UIA, Linux AT-SPI) and synthesises native inputs (clicks, keyboard). Bypasses standard LLM dispatch to run its own scan-act-verify loop. Inputs in metadata: app (required) and goal (required). Returns AgentResult upon success or failure. Use for all local application tasks.

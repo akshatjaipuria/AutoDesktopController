@@ -2,7 +2,7 @@ import sqlite3, time
 from contextlib import contextmanager
 from pathlib import Path
 
-DB_PATH = str(Path(__file__).parent / "gateway_v8.db")
+DB_PATH = str(Path(__file__).parent / "gateway_v9.db")
 
 
 @contextmanager

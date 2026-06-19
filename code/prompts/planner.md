@@ -36,13 +36,24 @@ Available skills:
                      cascade choose its own layer; the skill knows
                      how to escalate from extract → a11y → vision
                      when needed.
+  computer           drive native desktop applications using OS
+                     accessibility trees (macOS AX, Windows UIA).
+                     Use this for ANY request to open, read, or
+                     interact with a local application (e.g.,
+                     "Open Calculator", "Check my Mail", "Create a
+                     Pages document").
+                     metadata MUST set: app (str, the exact name of
+                     the app to launch, e.g. "Calculator") and goal
+                     (str, the specific task to accomplish within).
+                     The skill autonomously executes a loop of scan,
+                     act, verify to achieve the goal.
   researcher         fetch fresh content from the web (general
                      URLs, search). Use for open-ended research
                      across multiple sources. Do NOT use when the
                      answer lives in one specific site's interactive
                      listing — that is what Browser exists for.
 
-ALWAYS insert a `distiller` node between Browser and Formatter when
+ALWAYS insert a `distiller` node between Browser (or computer) and Formatter when
 the user wants structured fields per item (a list of model_name +
 param_count + description, a table of price + bed_count, etc.).
 Browser returns raw page text; Distiller turns that text into the

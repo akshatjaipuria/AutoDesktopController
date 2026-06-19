@@ -157,7 +157,7 @@ class GeminiEmbedder(EmbeddingProvider):
     }
 
     def __init__(self, api_key: str, model: str, output_dim: int = EMBED_DIM,
-                 rpm: int = 5, cooldown: float = 5.0):
+                 rpm: int = 100, cooldown: float = 0.1):
         self.api_key = api_key
         self.model = model
         self.output_dim = output_dim

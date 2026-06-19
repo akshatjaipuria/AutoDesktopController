@@ -1,0 +1,23 @@
+[
+  {
+    "id": "mem:c2987b81",
+    "kind": "scratchpad",
+    "keywords": [
+      "calculator",
+      "calculate",
+      "15 percent",
+      "850"
+    ],
+    "descriptor": "Calculate 15 percent of 850 using the Calculator app",
+    "value": {
+      "raw": "Open the Calculator app and calculate 15 percent of 850"
+    },
+    "artifact_id": null,
+    "embedding": null,
+    "source": "user_query",
+    "run_id": "s8-3437eadb",
+    "goal_id": null,
+    "confidence": 1.0,
+    "created_at": "2026-06-19T07:20:11.625749"
+  }
+]
